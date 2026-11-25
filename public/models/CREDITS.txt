@@ -1,0 +1,9 @@
+CAR MODELS (downloaded via vecarz.com, originally from Sketchfab)
+  ferrari.glb   - Ferrari Daytona SP3
+  jaguar.glb    - Jaguar Mk II
+  teramont.glb  - Volkswagen Teramont 3.6 Highline (2024)
+They were converted for the web (interior removed, simplified, compressed) - see tools/car-pipeline/.
+IMPORTANT: check the licence on each model's original Sketchfab page. Most downloadable models are CC-BY, which means
+you must credit the author (add the author names and links here and on your portfolio). Ferrari, Jaguar and Volkswagen are trademarks
+of their owners - fine for a personal portfolio, do not sell or use commercially without permission.
+Characters (hero.glb, crowd.glb): Microsoft Rocketbox avatars, MIT licence - see LICENSE-Rocketbox.txt.

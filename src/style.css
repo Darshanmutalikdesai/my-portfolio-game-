@@ -1,0 +1,158 @@
+* { box-sizing: border-box; }
+/* --display = chunky retro-game headline font (Bowlby One from Google Fonts; falls back to Impact / Arial Black offline) */
+:root { --display: 'Bowlby One', 'Titan One', Impact, 'Arial Black', sans-serif; --body: 'Rubik', system-ui, 'Segoe UI', Arial, sans-serif; }
+html, body, #root { margin: 0; width: 100%; height: 100%; overflow: hidden; background: #000; font-family: var(--body); }
+.mission b, .banner, .passed h1, .passed h2, .speed span, .panel h2, .prompt b, .welcome, .press, .cheat b { font-family: var(--display); font-weight: 400; }
+.panel h3 { font-family: var(--display); font-weight: 400; letter-spacing: 1px; }
+.hud { position: fixed; inset: 0; pointer-events: none; color: #fff; text-shadow: 0 2px 6px #000; }
+.mission { position: absolute; top: 20px; left: 20px; display: flex; flex-direction: column; gap: 4px; background: rgba(0,0,0,.45); padding: 10px 16px; border-left: 4px solid #ffd24d; }
+.mission b { color: #ffd24d; font-size: 12px; letter-spacing: 2px; }
+.mission { max-width: min(430px, 90vw); }
+.mission span { font-size: 14px; }
+.mission em { font-style: normal; font-size: 13px; color: #ffd24d; }
+.chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.chips i { font-style: normal; font-size: 10px; letter-spacing: 1px; padding: 2px 7px; border-radius: 10px; background: rgba(255,255,255,.1); color: #9a9da6; }
+.chips i.on { background: var(--c); color: #000; text-shadow: none; font-weight: 700; }
+.chips i.now { outline: 1px solid var(--c); color: #fff; }
+.banner { position: absolute; top: 22%; left: 50%; transform: translateX(-50%); font-size: clamp(18px, 3.4vw, 34px); font-weight: 800; letter-spacing: 3px; white-space: nowrap; padding: 12px 28px; background: rgba(0,0,0,.7); border: 2px solid #ffd24d; border-radius: 8px; animation: pop .45s ease-out; }
+@keyframes pop { from { transform: translateX(-50%) scale(.6); opacity: 0; } to { transform: translateX(-50%) scale(1); opacity: 1; } }
+.skip { position: absolute; top: 20px; left: 50%; transform: translateX(-50%); pointer-events: auto; color: #fff; font-size: 13px; background: rgba(0,0,0,.45); padding: 8px 14px; border-radius: 20px; text-decoration: none; }
+.mini { position: absolute; left: 20px; bottom: 20px; width: 150px; height: 150px; border-radius: 50%; border: 3px solid #fff; background: rgba(10,10,20,.65); }
+.speed { position: absolute; right: 24px; bottom: 20px; text-align: right; }
+.speed span { font-size: 56px; font-weight: 800; font-style: italic; }
+.speed small { margin-left: 6px; opacity: .8; }
+.keys { position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%); font-size: 12px; opacity: .7; white-space: nowrap; }
+.prompt { position: absolute; bottom: 90px; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,.7); padding: 12px 24px; border: 2px solid; border-radius: 8px; font-size: 18px; }
+.panel { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(520px, 90vw); max-height: 80vh; overflow: auto; pointer-events: auto; background: rgba(12,12,20,.92); border: 2px solid; border-radius: 12px; padding: 24px; text-shadow: none; }
+.panel h2 { margin: 0 0 14px; letter-spacing: 3px; }
+.panel h3 { margin: 0 0 2px; font-size: 17px; }
+.panel p { white-space: pre-line; margin: 0 0 14px; opacity: .8; font-size: 14px; }
+.panel a { color: #fff; }
+.bar { height: 8px; background: #333; border-radius: 4px; margin: -6px 0 14px; overflow: hidden; }
+.bar i { display: block; height: 100%; }
+.panel button { background: #fff; color: #000; border: 0; padding: 8px 18px; border-radius: 6px; font-weight: 700; cursor: pointer; }
+@media (max-width: 700px) { .keys { display: none; } .mini { width: 110px; height: 110px; } }
+
+/* ---- MISSION PASSED screen ---- */
+.passed { position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(0,0,0,.25), rgba(0,0,0,.75)); animation: pfade 6s ease-in-out forwards; display: flex; align-items: center; justify-content: center; }
+.passed .bar { position: absolute; left: 0; right: 0; height: 12vh; background: #000; }
+.passed .bar.top { top: 0; } .passed .bar.bot { bottom: 0; }
+.pwrap { text-align: center; padding: 0 16px; }
+.passed h1 { margin: 0; font-size: clamp(44px, 10vw, 128px); font-style: italic; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; line-height: 1;
+  background: linear-gradient(#fff3b0, #ffc400 55%, #b86e00); -webkit-background-clip: text; background-clip: text; color: transparent;
+  -webkit-text-stroke: 2px rgba(0,0,0,.55); filter: drop-shadow(0 6px 0 rgba(0,0,0,.6)) drop-shadow(0 0 28px rgba(255,190,0,.45)); animation: pslam .7s cubic-bezier(.2,1.4,.4,1) both; }
+.passed h2 { margin: 18px 0 6px; font-size: clamp(16px, 2.6vw, 30px); letter-spacing: 6px; color: #fff; animation: prise .8s .5s both; }
+.passed p { margin: 0 0 16px; opacity: .85; letter-spacing: 2px; animation: prise .8s .7s both; }
+.pchips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; animation: prise .8s .9s both; }
+.pchips i { font-style: normal; font-weight: 700; font-size: 12px; letter-spacing: 1px; color: #000; text-shadow: none; padding: 4px 10px; border-radius: 12px; }
+@keyframes pfade { 0% { opacity: 0; } 8% { opacity: 1; } 88% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes pslam { from { transform: scale(2.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes prise { from { transform: translateY(14px); opacity: 0; } to { transform: none; opacity: 1; } }
+
+.musicbtn { position: absolute; top: 20px; right: 20px; pointer-events: auto; cursor: pointer; background: rgba(0,0,0,.55); color: #fff; border: 1px solid rgba(255,255,255,.35); border-radius: 20px; padding: 8px 14px; font-size: 12px; letter-spacing: 1px; font-weight: 700; text-shadow: none; }
+.musicbtn:hover { background: rgba(255,255,255,.18); } .musicbtn small { opacity: .6; font-weight: 400; }
+
+/* ---- opening title card ---- */
+.intro { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; color: #fff; background: rgba(6,0,24,.5); animation: introbg 3.2s ease-out both; transition: opacity .6s; }
+.intro.out { opacity: 0; pointer-events: none; }
+@keyframes introbg { 0% { background: #000; } 35% { background: #000; } 100% { background: rgba(6,0,24,.5); } }
+.introwrap { display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; padding: 0 16px; }
+.welcome { font-size: clamp(14px, 2.4vw, 26px); letter-spacing: .5em; color: #ffd8f0; text-shadow: 0 0 18px #ff3fa0; animation: introfade 1.6s .3s both; }
+.logo { width: min(820px, 88vw); max-height: 62vh; filter: drop-shadow(0 10px 30px rgba(255,60,160,.45)); animation: introfade 1.8s .6s both; }
+.logo text { font-family: var(--display); }
+.press { margin-top: 10px; font-size: clamp(13px, 1.7vw, 20px); letter-spacing: .3em; color: #fff; text-shadow: 0 0 14px #19e8ff; animation: introfade .6s 2s both, blink 1.3s 2.6s infinite; }
+.introkeys { font-size: 12px; opacity: .75; letter-spacing: 1px; animation: introfade 1s 2.4s both; }
+@keyframes introfade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes blink { 50% { opacity: .25; } }
+
+/* ---- cheat list ---- */
+.help { width: min(560px, 92vw); }
+.help p { margin: 0 0 12px; }
+.cheat { display: flex; gap: 14px; align-items: baseline; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,.1); }
+.cheat b { flex: 0 0 150px; color: #19e8ff; font-size: 14px; letter-spacing: 1px; }
+.cheat span { font-size: 13px; opacity: .85; }
+.mission em { color: #ffd8f0; }
+
+/* ---- island map (Q) ---- */
+.mapbtn { position: absolute; left: 20px; bottom: 182px; pointer-events: auto; cursor: pointer; border: 2px solid #ff77b0; background: rgba(26, 12, 52, .78); color: #fff; border-radius: 20px; padding: 6px 14px; font: 600 13px 'Rubik', sans-serif; }
+.mapbtn small { opacity: .7; }
+.mapwrap { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); pointer-events: auto; background: linear-gradient(160deg, rgba(40, 18, 84, .97), rgba(120, 38, 110, .95)); border: 2px solid #ff77b0; border-radius: 16px; padding: 12px 14px 10px; text-shadow: none; z-index: 5; }
+.maphead { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+.maphead h2 { margin: 0; font-family: 'Titan One', 'Rubik', sans-serif; font-weight: 400; letter-spacing: 3px; font-size: 26px; background: linear-gradient(#fff2b0, #ff9ac0); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.maphead button { background: #fff; color: #000; border: 0; padding: 6px 14px; border-radius: 6px; font-weight: 700; cursor: pointer; }
+.mapwrap canvas { display: block; width: min(78vh, 86vw); height: min(78vh, 86vw); border-radius: 10px; cursor: crosshair; background: #0e5a86; }
+.maplegend { margin-top: 8px; font-size: 12px; display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; opacity: .95; }
+.maplegend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 4px; vertical-align: -2px; }
+.maplegend span { width: 100%; opacity: .75; }
+@media (max-width: 700px) { .mapbtn { bottom: 140px; } }
+
+/* ---- v12: police case, weapons, crosshair, cash ---- */
+.cash { position: absolute; top: 62px; right: 20px; font: 400 26px 'Titan One', 'Rubik', sans-serif; color: #b6ff8a; text-shadow: 0 2px 0 #1b4a12, 0 0 14px rgba(120, 255, 90, .4); }
+.case { position: absolute; top: 100px; right: 20px; width: 270px; padding: 10px 14px; background: rgba(40, 8, 20, .82); border: 2px solid #ff3b5c; border-radius: 12px; animation: casepulse 1s infinite alternate; }
+@keyframes casepulse { from { box-shadow: 0 0 0 rgba(255, 59, 92, 0); } to { box-shadow: 0 0 22px rgba(255, 59, 92, .7); } }
+.case strong { display: block; font: 400 16px 'Titan One', 'Rubik', sans-serif; letter-spacing: 1px; color: #ff9aa8; }
+.case small { display: block; opacity: .8; font-size: 11px; margin: 2px 0 8px; }
+.case .stars { position: static; display: flex; gap: 2px; font-size: 22px; margin-bottom: 2px; }
+.case .stars b { color: #4a2a44; } .case .stars b.on { color: #ffd84a; text-shadow: 0 0 10px #ff9a00; animation: blinkstar .5s infinite alternate; }
+@keyframes blinkstar { from { opacity: 1; } to { opacity: .4; } }
+.meter { position: relative; height: 16px; margin-top: 5px; background: rgba(255, 255, 255, .14); border-radius: 8px; overflow: hidden; }
+.meter i { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: linear-gradient(90deg, #19e8ff, #7dff6b); transition: width .12s linear; }
+.meter.red i { background: linear-gradient(90deg, #ffb347, #ff2d4d); }
+.meter span { position: relative; display: block; text-align: center; font: 600 10px 'Rubik', sans-serif; letter-spacing: 2px; line-height: 16px; }
+.hurt { position: absolute; top: 100px; right: 20px; background: rgba(26, 12, 52, .8); border: 2px solid #ffb347; border-radius: 10px; padding: 6px 12px; font: 600 13px 'Rubik', sans-serif; }
+.weapon { position: absolute; right: 20px; bottom: 112px; text-align: right; }
+.weapon b { font: 400 20px 'Titan One', 'Rubik', sans-serif; letter-spacing: 2px; color: #fff; text-shadow: 0 2px 0 #2a1259; }
+.weapon span { display: block; font: 400 24px 'Titan One', 'Rubik', sans-serif; color: #ffd37a; }
+.weapon small { display: block; font-size: 10px; opacity: .65; max-width: 230px; margin-left: auto; }
+.crosshair { position: absolute; left: 50%; top: 50%; width: 22px; height: 22px; transform: translate(-50%, -50%); }
+.crosshair::before, .crosshair::after { content: ''; position: absolute; background: #fff; box-shadow: 0 0 4px #000; }
+.crosshair::before { left: 10px; top: 0; width: 2px; height: 22px; opacity: .85; } .crosshair::after { top: 10px; left: 0; height: 2px; width: 22px; opacity: .85; }
+.mousehint { position: absolute; left: 50%; top: 14px; transform: translateX(-50%); background: rgba(26, 12, 52, .8); border: 1px solid #ff77b0; border-radius: 20px; padding: 5px 14px; font-size: 12px; white-space: nowrap; }
+@media (max-width: 700px) { .case { width: 200px; } .mousehint { display: none; } }
+
+/* =====================================================================
+   MOBILE / TOUCH  (html.touch is set by src/device.js on touch screens; try ?touch=1 on a PC to test)
+   ===================================================================== */
+html, body, #root { height: 100dvh; overscroll-behavior: none; -webkit-tap-highlight-color: transparent; }
+html.touch, html.touch body { touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+canvas { touch-action: none; }
+.panel, .helpbox, .mapwrap { touch-action: pan-y; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; }
+.touchui { position: absolute; inset: 0; pointer-events: none; z-index: 4; }
+.tzone { position: absolute; pointer-events: auto; touch-action: none; }
+.tstick { left: 0; bottom: 0; width: 46%; height: 74%; }
+.tlook { right: 0; top: 0; width: 54%; height: 100%; }
+.tstickhint { position: absolute; left: calc(44px + env(safe-area-inset-left)); bottom: calc(34px + env(safe-area-inset-bottom)); width: 104px; height: 104px; border-radius: 50%; border: 3px solid rgba(255, 255, 255, .3); background: rgba(255, 255, 255, .06); pointer-events: none; transition: opacity .2s; }
+.tstickhint i { position: absolute; left: 26px; top: 26px; width: 48px; height: 48px; border-radius: 50%; background: rgba(255, 255, 255, .25); }
+.tbase { display: none; position: fixed; width: 116px; height: 116px; border-radius: 50%; border: 3px solid rgba(255, 255, 255, .5); background: rgba(255, 255, 255, .12); pointer-events: none; }
+.tbase i { position: absolute; left: 31px; top: 31px; width: 52px; height: 52px; border-radius: 50%; background: rgba(255, 255, 255, .65); box-shadow: 0 0 14px rgba(255, 119, 176, .9); }
+.tb { position: absolute; pointer-events: auto; touch-action: none; border-radius: 50%; border: 3px solid rgba(255, 255, 255, .75); background: rgba(40, 18, 84, .6); color: #fff; font: 600 11px 'Rubik', sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0; text-shadow: none; letter-spacing: .5px; backdrop-filter: blur(3px); }
+.tb:active, .tb.on { background: rgba(255, 119, 176, .8); transform: scale(.93); }
+.tfire { width: 80px; height: 80px; right: calc(16px + env(safe-area-inset-right)); bottom: calc(20px + env(safe-area-inset-bottom)); border-color: #ff5d8f; font-size: 14px; background: rgba(120, 20, 70, .6); }
+.tjump { width: 60px; height: 60px; right: calc(104px + env(safe-area-inset-right)); bottom: calc(14px + env(safe-area-inset-bottom)); }
+.tcar { width: 56px; height: 56px; right: calc(16px + env(safe-area-inset-right)); bottom: calc(110px + env(safe-area-inset-bottom)); }
+.tuse { width: 56px; height: 56px; right: calc(82px + env(safe-area-inset-right)); bottom: calc(88px + env(safe-area-inset-bottom)); }
+.taim { width: 50px; height: 50px; right: calc(148px + env(safe-area-inset-right)); bottom: calc(76px + env(safe-area-inset-bottom)); }
+.twpn { width: 66px; height: 66px; right: calc(14px + env(safe-area-inset-right)); bottom: calc(176px + env(safe-area-inset-bottom)); font-size: 9px; }
+.twpn b { font-weight: 700; } .twpn span { font-size: 11px; color: #ffd37a; }
+.trel { width: 44px; height: 44px; right: calc(88px + env(safe-area-inset-right)); bottom: calc(164px + env(safe-area-inset-bottom)); font-size: 20px; }
+.tmenu { position: absolute; top: calc(8px + env(safe-area-inset-top)); right: calc(8px + env(safe-area-inset-right)); display: flex; gap: 6px; pointer-events: auto; }
+.tm { width: 40px; height: 40px; border-radius: 12px; border: 2px solid rgba(255, 255, 255, .6); background: rgba(40, 18, 84, .65); color: #fff; font-size: 18px; padding: 0; touch-action: none; }
+.tm:active { background: rgba(255, 119, 176, .8); }
+.trotate { display: none; position: absolute; left: 50%; top: calc(64px + env(safe-area-inset-top)); transform: translateX(-50%); background: rgba(26, 12, 52, .88); border: 1px solid #ff77b0; border-radius: 20px; padding: 8px 14px; font-size: 12px; text-align: center; pointer-events: none; white-space: nowrap; }
+@media (orientation: portrait) { html.touch .trotate { display: block; } }
+
+html.touch .keys, html.touch .mapbtn, html.touch .mousehint, html.touch .musicbtn, html.touch .chips, html.touch .weapon { display: none !important; }
+html.touch .mission { top: calc(8px + env(safe-area-inset-top)); left: calc(8px + env(safe-area-inset-left)); max-width: 42vw; padding: 5px 9px; gap: 2px; }
+html.touch .mission b { font-size: 10px; letter-spacing: 1px; } html.touch .mission span { font-size: 11px; line-height: 1.25; } html.touch .mission em { font-size: 10.5px; }
+html.touch .skip { top: auto; bottom: calc(2px + env(safe-area-inset-bottom)); left: 50%; transform: translateX(-50%); font-size: 10px; padding: 3px 9px; pointer-events: auto; }
+html.touch .mini { left: auto; right: calc(8px + env(safe-area-inset-right)); top: calc(56px + env(safe-area-inset-top)); bottom: auto; width: 88px; height: 88px; border-width: 2px; }
+html.touch .cash { top: calc(11px + env(safe-area-inset-top)); right: calc(190px + env(safe-area-inset-right)); font-size: 17px; }
+html.touch .case { top: calc(150px + env(safe-area-inset-top)); right: calc(8px + env(safe-area-inset-right)); width: 168px; padding: 5px 9px; }
+html.touch .case strong { font-size: 11px; } html.touch .case small { display: none; } html.touch .case .stars { font-size: 16px; }
+html.touch .hurt { top: calc(150px + env(safe-area-inset-top)); right: calc(8px + env(safe-area-inset-right)); font-size: 11px; padding: 4px 8px; }
+html.touch .speed { bottom: calc(20px + env(safe-area-inset-bottom)); left: 50%; right: auto; transform: translateX(-50%); text-align: center; }
+html.touch .speed span { font-size: 30px; } html.touch .speed small { font-size: 9px; }
+html.touch .prompt { bottom: calc(96px + env(safe-area-inset-bottom)); font-size: 13px; padding: 7px 14px; max-width: 58vw; text-align: center; }
+html.touch .panel { max-height: 86vh; width: min(94vw, 560px); padding: 16px; }
+html.touch .cheat { padding: 9px 4px; border-bottom: 1px solid rgba(255, 255, 255, .12); cursor: pointer; } html.touch .cheat:active { background: rgba(255, 119, 176, .25); }
+html.touch .mapwrap canvas { width: min(70vh, 84vw); height: min(70vh, 84vw); }
