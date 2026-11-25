@@ -2,7 +2,7 @@
 export const PROFILE = {
   name: 'DARSHAN MUTALIKDESAI',
   role: 'Frontend Developer · Full-Stack',
-  fallbackUrl: 'https://darshanmutalikdesai.dev/',
+  fallbackUrl: 'https://gta-portfolio.pages.dev/',
   // opening title card (style inspired by retro-neon game logos, but with your own words)
   welcome: 'WELCOME TO',
   gameTitle: ['grand', 'theft', 'portfolio'],   // 3 stacked lines
@@ -67,7 +67,7 @@ export const ZONES = [
       { t: 'Email', d: 'darshanmutalikdesai22@gmail.com', link: 'mailto:darshanmutalikdesai22@gmail.com' },
       { t: 'Location', d: 'Belagavi, Karnataka, India' },
       { t: 'LinkedIn', d: 'linkedin.com/in/darshan-mutalikdesai-b4a4832a0', link: 'https://www.linkedin.com/in/darshan-mutalikdesai-b4a4832a0' },
-      { t: 'Portfolio', d: 'darshanmutalikdesai.dev', link: 'https://darshanmutalikdesai.dev/' },
+      { t: 'Portfolio', d: 'gta-portfolio.pages.dev', link: 'https://gta-portfolio.pages.dev/' },
     ],
   },
 ]
