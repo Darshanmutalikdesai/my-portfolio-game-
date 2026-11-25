@@ -28,12 +28,12 @@ Touch controls switch on automatically on touch screens (add `?touch=1` to the a
 This is a static Vite app and does not need a server or paid Workers features.
 
 1. Push this project to GitHub.
-2. In the Cloudflare dashboard, open **Workers & Pages**, create a **Pages** project, and connect the GitHub repository.
+2. In the Cloudflare dashboard, open **Workers & Pages**, create a **Pages** project (not a Worker), and connect the GitHub repository.
 3. Use these build settings:
    * Build command: `npm run build`
    * Build output directory: `dist`
    * Root directory: the folder containing this `package.json`
-4. Save and deploy. Cloudflare will build each time you push to the connected branch.
+4. Save and deploy. For a Git-connected Pages project, Cloudflare deploys automatically after the build; do not set `npx wrangler deploy` as a deploy command. If deploying manually with Wrangler, use `npx wrangler pages deploy dist`.
 
 The `wrangler.toml` file records the Pages output directory for Wrangler-compatible tooling. You can also build locally with `npm run build`; the deployable static site is in `dist/`.
 
