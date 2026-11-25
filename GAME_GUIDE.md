@@ -21,7 +21,21 @@ Touch controls switch on automatically on touch screens (add `?touch=1` to the a
 * Portrait works but shows a "turn your phone sideways" hint. Landscape is the comfortable way to play.
 * **Light graphics mode** is automatic on phones: lower render resolution, smaller shadow map, fewer cars / people / raindrops, no anti-aliasing buffer. Force it with `?low=1` or turn it off with `?low=0`.
 * Mobile page setup: no zoom / pull-to-refresh / text selection, notch-safe layout, fullscreen-ready.
-* **Try it on your phone:** `npm run dev:phone`, then open the "Network" address it prints (same Wi-Fi) on the phone. For everyone else, `npm run build` and upload `dist/` to Vercel / Netlify.
+* **Try it on your phone:** `npm run dev:phone`, then open the "Network" address it prints (same Wi-Fi) on the phone. For everyone else, `npm run build` and upload `dist/` to Cloudflare Pages, Vercel, or Netlify.
+
+## Deploy to Cloudflare Pages (free)
+
+This is a static Vite app and does not need a server or paid Workers features.
+
+1. Push this project to GitHub.
+2. In the Cloudflare dashboard, open **Workers & Pages**, create a **Pages** project, and connect the GitHub repository.
+3. Use these build settings:
+   * Build command: `npm run build`
+   * Build output directory: `dist`
+   * Root directory: the folder containing this `package.json`
+4. Save and deploy. Cloudflare will build each time you push to the connected branch.
+
+The `wrangler.toml` file records the Pages output directory for Wrangler-compatible tooling. You can also build locally with `npm run build`; the deployable static site is in `dist/`.
 
 ## Controls (keyboard + mouse, or a gamepad)
 | | Keyboard / mouse | Gamepad (Xbox layout) |
